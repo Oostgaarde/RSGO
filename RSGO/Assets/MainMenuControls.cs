@@ -6,12 +6,15 @@ using UnityEngine.UI;
 public class MainMenuControls : MonoBehaviour {
     public string DebugLog;
     public float count = 0;
-    public float lat, lon;
+    public float PreLat, PreLon,lat, lon, deltaLat,deltaLon;
     public float timeInterval;
     float actualTime;
 	// Use this for initialization
 	void Start () {
+
         Input.location.Start();
+		PreLat = Input.location.lastData.latitude;
+		PreLon = Input.location.lastData.longitude;
         timeInterval = 30.0f;
         actualTime = timeInterval;
         UpdateLocation();
@@ -23,7 +26,11 @@ public class MainMenuControls : MonoBehaviour {
         if(actualTime <= 0)
         {
             UpdateLocation();
-            actualTime = timeInterval;
+			deltaLat = PreLat - Input.location.lastData.latitude * -1f;
+			deltaLon = PreLon - Input.location.lastData.longitude * -1f;
+			PreLat = Input.location.lastData.latitude;
+			PreLon = Input.location.lastData.longitude;
+			actualTime = timeInterval;
         }
         
 
@@ -33,8 +40,7 @@ public class MainMenuControls : MonoBehaviour {
     {
         if (Input.location.isEnabledByUser)
         {
-            lat = Input.location.lastData.latitude;
-            lon = Input.location.lastData.longitude;
+
             count++;
             DebugLog = "Lat: " + lat + ", Lon: " + lon + ", Count: " + count;
             GameObject.Find("Cube").GetComponent<GoogleMap>().UpdateMap(lat, lon);

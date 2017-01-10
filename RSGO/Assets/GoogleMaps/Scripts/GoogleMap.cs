@@ -131,7 +131,7 @@ public class GoogleMapMarker
 	}
 	public GoogleMapMarkerSize size;
 	public GoogleMapColor color;
-	public string label;
+	public string label;	
 	public GoogleMapLocation[] locations;
 	
 }
