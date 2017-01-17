@@ -22,7 +22,7 @@ public class GoogleMap : MonoBehaviour
     public string DebugLog;
     public float count = 0;
 	void Start() {
-		if(loadOnStart) Refresh();	
+		//if(loadOnStart) Refresh();	
 	}
 	
 	public void Refresh() {
@@ -93,7 +93,7 @@ public class GoogleMap : MonoBehaviour
     {
         centerLocation.latitude = lat;
         centerLocation.longitude = lon;
-        StartCoroutine(_Refresh());
+        Refresh();
     }
 	
 }
